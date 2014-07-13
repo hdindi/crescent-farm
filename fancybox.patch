@@ -1,0 +1,73 @@
+--- assets/grocery_crud/themes/datatables/views/list_template.php.bak	2012-09-14 11:48:52.000000000 +0200
++++ assets/grocery_crud/themes/datatables/views/list_template.php	2012-09-17 14:57:43.487708139 +0200
+@@ -1,5 +1,15 @@
++<!-- fancybox -->
++<script type="text/javascript">
++$(document).ready(function() {
++    $(".various").fancybox();
++});
++$(document).ready(function() {
++    $(".fancybox").fancybox();
++});
++</script>
++<!-- end fancybox -->
++
+ <?php  
+-	
+ 	$this->set_css($this->default_theme_path.'/datatables/css/demo_table_jui.css');
+ 	$this->set_css($this->default_css_path.'/ui/simple/jquery-ui-1.8.23.custom.css');
+ 	$this->set_css($this->default_theme_path.'/datatables/css/datatables.css');	
+@@ -11,6 +21,12 @@
+ 	$this->set_js($this->default_theme_path.'/datatables/js/datatables.js');
+ 	$this->set_js($this->default_theme_path.'/datatables/extras/TableTools/media/js/ZeroClipboard.js');
+ 	$this->set_js($this->default_theme_path.'/datatables/extras/TableTools/media/js/TableTools.min.js');
++
++    //FancyBox
++    $this->set_css("assets/plugins/fancybox/jquery.fancybox.css?v=2.1.0");
++	$this->set_js("assets/plugins/fancybox/jquery.fancybox.pack.js?v=2.1.0");
++    //end FancyBox
++
+ ?>
+ <script type='text/javascript'>
+ 	var base_url = '<?php echo base_url();?>';
+@@ -93,11 +109,11 @@
+ </div>	
+ <?php if(!$unset_add){?>
+ <div class="datatables-add-button">
+-<a role="button" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" href="<?php echo $add_url?>">
++<a role="button" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary various fancybox.ajax" href="<?php echo $add_url?>">
+ 	<span class="ui-button-icon-primary ui-icon ui-icon-circle-plus"></span>
+ 	<span class="ui-button-text"><?php echo $this->l('list_add'); ?> <?php echo $subject?></span>
+ </a>
+ </div>
+ <?php }?>
+ <div style='height:10px;'></div>
+-<?php echo $list_view?>
+\ No newline at end of file
++<?php echo $list_view?>
+--- ../orig/grocery-1.3.1/assets/grocery_crud/themes/datatables/views/list.php	2012-09-05 00:09:36.000000000 +0200
++++ assets/grocery_crud/themes/datatables/views/list.php	2012-09-17 15:29:18.618752887 +0200
+@@ -22,14 +22,14 @@
+ 					foreach($row->action_urls as $action_unique_id => $action_url){ 
+ 						$action = $actions[$action_unique_id];
+ 				?>
+-						<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
++						<a href="<?php echo $action_url; ?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary various fancybox.ajax" role="button">
+ 							<span class="ui-button-icon-primary ui-icon <?php echo $action->css_class; ?> <?php echo $action_unique_id;?>"></span><span class="ui-button-text">&nbsp;<?php echo $action->label?></span>
+ 						</a>		
+ 				<?php }
+ 				}
+ 				?>			
+ 				<?php if(!$unset_edit){?>
+-					<a href="<?php echo $row->edit_url?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button">
++					<a href="<?php echo $row->edit_url?>" class="edit_button ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary various fancybox.ajax" role="button">
+ 						<span class="ui-button-icon-primary ui-icon ui-icon-pencil"></span>
+ 						<span class="ui-button-text">&nbsp;<?php echo $this->l('list_edit'); ?></span>
+ 					</a>
+@@ -46,4 +46,4 @@
+ 		</tr>
+ 		<?php }?>
+ 	</tbody>
+-</table>
+\ No newline at end of file
++</table>
